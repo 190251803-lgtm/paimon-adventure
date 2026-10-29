@@ -9,13 +9,16 @@
     <link rel="stylesheet" href="./css/styles.css" />
   </head>
   <body>
-    <div class="orientation-lock" role="status" aria-live="polite">
-      <div class="orientation-lock-card">
-        <span class="orientation-lock-icon" aria-hidden="true">↻</span>
-        <strong>请横向握持设备</strong>
-        <span>旋转手机后即可继续冒险</span>
-      </div>
-    </div>
+    <script>
+      (() => {
+        const syncOrientation = () => {
+          const portraitPhone = window.matchMedia("(max-width: 980px) and (orientation: portrait)").matches;
+          document.documentElement.classList.toggle("virtual-landscape", portraitPhone);
+        };
+        syncOrientation();
+        window.addEventListener("resize", syncOrientation);
+      })();
+    </script>
     <div id="app" aria-live="polite"></div>
     <script type="module" src="./js/main.js"></script>
   </body>
