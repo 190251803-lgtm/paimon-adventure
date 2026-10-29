@@ -563,16 +563,33 @@ h1 { margin: 0; font-family: Georgia, "Songti SC", serif; font-size: clamp(2rem,
   .title-actions { gap: 8px; }
   .title-actions button { min-height: 38px; padding-inline: 16px; }
 
-  .selection-screen { min-height: 100dvh; padding: max(14px, env(safe-area-inset-top)) max(18px, env(safe-area-inset-right)) max(26px, env(safe-area-inset-bottom)) max(18px, env(safe-area-inset-left)); }
-  .screen-heading { margin: 18px auto 16px; }
-  .screen-heading h1 { font-size: clamp(1.65rem, 5vw, 2.5rem); }
-  .screen-heading p:last-child { margin: 8px 0 0; font-size: .84rem; }
-  .captain-card { min-height: 150px; grid-template-rows: 150px; }
-  .partner-grid { gap: 10px; }
-  .character-card { min-height: 280px; grid-template-rows: 150px 1fr; }
-  .character-copy { padding: 10px 12px 12px; }
-  .partner-description { margin-top: 7px; font-size: .75rem; line-height: 1.4; }
-  .partner-command { padding-top: 8px; font-size: .75rem; }
+  .selection-screen {
+    min-height: 100dvh;
+    display: grid;
+    grid-template-columns: minmax(190px, .85fr) minmax(0, 2.15fr);
+    grid-template-rows: auto 1fr;
+    grid-template-areas: "back heading" "captain partners";
+    align-items: start;
+    column-gap: 14px;
+    padding: max(10px, env(safe-area-inset-top)) max(18px, env(safe-area-inset-right)) max(18px, env(safe-area-inset-bottom)) max(18px, env(safe-area-inset-left));
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  .selection-screen > .back-button { grid-area: back; align-self: start; }
+  .screen-heading { grid-area: heading; width: 100%; margin: 0 0 10px; text-align: left; }
+  .screen-heading h1 { font-size: clamp(1.45rem, 4vw, 2.2rem); }
+  .screen-heading p:last-child { max-width: 560px; margin: 5px 0 0; font-size: .76rem; line-height: 1.35; }
+  .captain-row { grid-area: captain; width: 100%; margin: 0; }
+  .captain-card { width: 100%; height: 214px; min-height: 0; grid-template-columns: 40% minmax(0, 1fr); grid-template-rows: 214px; }
+  .partner-grid { grid-area: partners; width: 100%; max-width: none; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .character-card { height: 214px; min-height: 0; grid-template-rows: 92px minmax(0, 1fr); }
+  .character-copy { min-height: 0; overflow: hidden; padding: 8px 9px 10px; }
+  .character-role { font-size: .62rem; }
+  .partner-name { margin-top: 3px; font-size: .94rem; }
+  .partner-element { margin-top: 3px; font-size: .68rem; line-height: 1.25; }
+  .partner-description { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; margin-top: 5px; font-size: .65rem; line-height: 1.3; }
+  .partner-command { padding-top: 5px; font-size: .67rem; }
+  .captain-card .partner-description { -webkit-line-clamp: 4; }
 
   .status-bar {
     min-height: 50px;
@@ -613,13 +630,37 @@ h1 { margin: 0; font-family: Georgia, "Songti SC", serif; font-size: clamp(2rem,
   .card-hand { min-height: 112px; padding: 4px; }
   .game-card { width: 104px; min-width: 104px; min-height: 108px; }
 
-  .choice-panel, .reward-content { min-height: calc(100dvh - 50px); padding: 24px max(18px, env(safe-area-inset-right)) max(28px, env(safe-area-inset-bottom)) max(18px, env(safe-area-inset-left)); }
+  .choice-panel, .reward-content { min-height: calc(100dvh - 50px); padding: 18px max(18px, env(safe-area-inset-right)) max(28px, env(safe-area-inset-bottom)) max(18px, env(safe-area-inset-left)); overflow-x: hidden; overflow-y: auto; }
   .choice-panel h1, .reward-content h1 { font-size: clamp(1.8rem, 5vw, 2.8rem); }
   .choice-intro, .reward-note { margin: 10px auto 18px; font-size: .85rem; line-height: 1.5; }
+  .reward-content > .eyebrow { margin-top: 0; }
+  .reward-content > h1 { margin: 4px 0 8px; }
+  .reward-content h1 { font-size: 2rem; }
+  .starting-treasure-art { width: min(120px, 18vw); height: 52px; margin: 0 auto 4px; }
+  .starting-treasure-art .node-scene-art { width: 100%; height: 100%; max-height: none; }
+  .reward-content .reward-note { max-width: 720px; margin: 6px auto 10px; }
+  .reward-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin: 14px 0 16px; align-items: stretch; }
+  .reward-card, .relic-choice { width: 100%; min-width: 0; min-height: 150px; padding: 8px 7px; overflow: hidden; }
+  .reward-card > span:last-child, .relic-choice > span:last-child { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; font-size: .68rem; line-height: 1.3; }
+  .reward-card strong, .relic-choice strong { max-width: 100%; overflow-wrap: anywhere; font-size: .86rem; text-align: center; }
+  .relic-choice { gap: 6px; }
+  .relic-symbol { width: 36px; height: 36px; font-size: 1.2rem; }
+  .starting-relic-action { font-size: .68rem; }
+  .choice-list { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 900px; }
+  .choice-button { min-height: 64px; grid-template-columns: 1fr; gap: 4px; padding: 10px 12px; }
+  .choice-button span { font-size: .76rem; }
   .shop-content { padding: 22px max(18px, env(safe-area-inset-right)) max(30px, env(safe-area-inset-bottom)) max(18px, env(safe-area-inset-left)); }
   .shop-grid { gap: 10px; margin: 16px 0; }
   .shop-item { padding: 14px 12px; }
   .reward-card { width: 170px; min-height: 220px; }
+}
+
+@media (max-width: 700px) and (orientation: landscape) {
+  .selection-screen { grid-template-columns: minmax(155px, .72fr) minmax(0, 2.28fr); column-gap: 9px; padding-inline: 10px; }
+  .captain-card { height: 190px; min-height: 0; grid-template-rows: 190px; }
+  .character-card { height: 190px; min-height: 0; grid-template-rows: 78px minmax(0, 1fr); }
+  .partner-description { -webkit-line-clamp: 2; }
+  .reward-card, .relic-choice { min-height: 170px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
