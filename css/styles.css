@@ -694,8 +694,36 @@ h1 { margin: 0; font-family: Georgia, "Songti SC", serif; font-size: clamp(2rem,
   html.virtual-landscape .status-brand img { width: 30px; height: 30px; }
   html.virtual-landscape .status-items { gap: 5px 10px; font-size: .72rem; }
   html.virtual-landscape .map-scroll { max-width: 100%; overflow-x: auto; }
-  html.virtual-landscape .map-frame.map-frame--branching { height: min(58vw, 440px); min-height: 220px; }
-  html.virtual-landscape .map-frame { max-height: calc(100vh - 128px); }
+  html.virtual-landscape .map-scroll--branching {
+    touch-action: none;
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+  html.virtual-landscape .map-frame.map-frame--branching { height: min(calc(100vw - 16px), 440px); min-height: 0; }
+  html.virtual-landscape .map-frame { max-height: none; }
+  html.virtual-landscape dialog.term-dialog,
+  html.virtual-landscape dialog.rules-dialog {
+    position: fixed;
+    inset: 0 auto auto 0;
+    width: 100vh;
+    max-width: none;
+    height: 100vw;
+    max-height: none;
+    min-height: 0;
+    margin: 0;
+    box-sizing: border-box;
+    transform: rotate(90deg) translateY(-100%);
+    transform-origin: top left;
+    overflow-y: auto;
+  }
+  html.virtual-landscape dialog.term-dialog { padding: 18px 24px; }
+  html.virtual-landscape dialog.term-dialog.node-preview { width: 100vh; max-height: none; }
+  html.virtual-landscape dialog.rules-dialog { padding: 20px 24px; }
+  html.virtual-landscape .node-preview-visual { margin: 10px 0 14px; }
+  html.virtual-landscape .preview-enemy-portrait { height: min(24vw, 190px); }
+  html.virtual-landscape .preview-enemy-grid { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; }
   html.virtual-landscape .encounter-panel { min-height: calc(100% - 50px); padding: 20px; }
   html.virtual-landscape .combat-stage {
     width: 100%;
