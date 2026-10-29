@@ -330,17 +330,20 @@ export class GameUI {
   }
 
   bindMapDrag(scroller) {
-    // Touch keeps native scrolling and inertia; mouse dragging also works over nodes.
+    // The virtual landscape canvas rotates the map, so a physical vertical swipe
+    // must be converted into the map's horizontal scroll axis.
     let gesture = null;
     let suppressClick = false;
     scroller.addEventListener("pointerdown", (event) => {
-      if (event.pointerType !== "mouse" || event.button !== 0) return;
+      if (event.pointerType === "mouse" && event.button !== 0) return;
+      if (event.pointerType !== "mouse" && event.pointerType !== "touch") return;
       suppressClick = false;
-      gesture = { id: event.pointerId, x: event.clientX, scrollLeft: scroller.scrollLeft, dragging: false };
+      const rotated = document.documentElement.classList.contains("virtual-landscape");
+      gesture = { id: event.pointerId, axis: rotated ? "y" : "x", start: rotated ? event.clientY : event.clientX, scrollLeft: scroller.scrollLeft, dragging: false };
     });
     scroller.addEventListener("pointermove", (event) => {
       if (!gesture || event.pointerId !== gesture.id) return;
-      const distance = event.clientX - gesture.x;
+      const distance = (gesture.axis === "y" ? event.clientY : event.clientX) - gesture.start;
       if (!gesture.dragging && Math.abs(distance) < 6) return;
       if (!gesture.dragging) {
         gesture.dragging = true;
