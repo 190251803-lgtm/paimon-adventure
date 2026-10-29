@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">星落地脉岛地图</title>
+  <desc id="desc">由海滩、草原、元素湖、遗迹、风场、山崖和地脉核心组成的幻想岛屿</desc>
+  <defs>
+    <linearGradient id="sea" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#75bac7"/>
+      <stop offset="1" stop-color="#236579"/>
+    </linearGradient>
+    <linearGradient id="land" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#8bbf72"/>
+      <stop offset="0.55" stop-color="#4c8e65"/>
+      <stop offset="1" stop-color="#68795c"/>
+    </linearGradient>
+    <linearGradient id="mountain" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#596958"/>
+      <stop offset="1" stop-color="#c5c8b1"/>
+    </linearGradient>
+    <radialGradient id="core">
+      <stop offset="0" stop-color="#f7d76e" stop-opacity="0.95"/>
+      <stop offset="0.48" stop-color="#9170bd" stop-opacity="0.75"/>
+      <stop offset="1" stop-color="#4c315f" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="soft"><feGaussianBlur stdDeviation="18"/></filter>
+  </defs>
+  <rect width="1200" height="720" fill="url(#sea)"/>
+  <path d="M77 570C58 450 154 345 242 299c68-35 113-124 219-146 107-22 168 45 252 38 105-8 174-54 262-6 73 39 69 124 120 181 54 60 70 144 14 199-79 76-191 43-276 72-118 41-191 8-278 4-103-5-180 49-285 16C179 629 91 655 77 570Z" fill="url(#land)" stroke="#d8d3a3" stroke-width="9"/>
+  <path d="M162 547c92-47 153-11 226-45 91-42 129-127 231-140 116-15 169 67 285 28 74-25 123-21 177 10" fill="none" stroke="#d6c890" stroke-width="7" stroke-dasharray="14 16" opacity="0.72"/>
+  <path d="M302 463c46-72 106-119 168-156M694 359c42-66 92-102 149-131M759 512c76-52 129-75 212-72" fill="none" stroke="#d6c890" stroke-width="5" stroke-dasharray="10 14" opacity="0.55"/>
+  <ellipse cx="532" cy="414" rx="112" ry="73" fill="#4e9eab" stroke="#a8e5d5" stroke-width="7"/>
+  <path d="M480 420c29-29 71-38 113-20-33 6-62 26-78 53Z" fill="#b4e7d9" opacity="0.45"/>
+  <g fill="#d0c7a2" stroke="#6d6654" stroke-width="5">
+    <path d="M352 286l46-69 51 71Z"/>
+    <rect x="372" y="276" width="58" height="60" rx="5"/>
+    <path d="M785 310l53-79 60 82Z"/>
+    <rect x="809" y="299" width="62" height="75" rx="5"/>
+  </g>
+  <g fill="url(#mountain)" stroke="#43514b" stroke-width="5">
+    <path d="M732 544l89-175 87 179Z"/>
+    <path d="M846 557l72-142 75 144Z"/>
+    <path d="M228 418l56-112 67 116Z"/>
+  </g>
+  <g fill="none" stroke="#dff7f3" stroke-width="8" stroke-linecap="round" opacity="0.85">
+    <path d="M662 531c-37-45-16-82 23-105 35-21 54-51 38-83"/>
+    <path d="M691 538c-27-37-7-67 27-88"/>
+  </g>
+  <circle cx="957" cy="178" r="118" fill="url(#core)" filter="url(#soft)"/>
+  <circle cx="957" cy="178" r="55" fill="#5d3a71" stroke="#f3d66e" stroke-width="8"/>
+  <path d="M957 119l14 41 43 1-34 25 12 42-35-25-35 25 12-42-34-25 43-1Z" fill="#f4d773"/>
+  <g fill="#d9edba" opacity="0.8">
+    <circle cx="190" cy="507" r="10"/><circle cx="219" cy="525" r="7"/><circle cx="269" cy="493" r="9"/>
+    <circle cx="621" cy="271" r="8"/><circle cx="648" cy="245" r="6"/><circle cx="676" cy="279" r="9"/>
+  </g>
+</svg>

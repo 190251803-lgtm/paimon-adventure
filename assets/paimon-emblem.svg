@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-labelledby="title">
+  <title id="title">派蒙星冠徽记</title>
+  <defs>
+    <radialGradient id="halo"><stop offset="0" stop-color="#fff8d7"/><stop offset="1" stop-color="#f2c969"/></radialGradient>
+    <linearGradient id="cape" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#334b73"/><stop offset="1" stop-color="#151e3c"/></linearGradient>
+  </defs>
+  <circle cx="120" cy="120" r="104" fill="#eaf5f2" stroke="#e6c46b" stroke-width="8"/>
+  <ellipse cx="120" cy="64" rx="52" ry="20" fill="none" stroke="#e6c46b" stroke-width="9"/>
+  <path d="M120 35l9 21 23 2-18 15 6 23-20-12-20 12 6-23-18-15 23-2Z" fill="url(#halo)"/>
+  <circle cx="120" cy="116" r="48" fill="#fff9ef" stroke="#cfb7a0" stroke-width="5"/>
+  <path d="M75 145c16 22 37 33 45 33s29-11 45-33l24 48c-23 22-47 31-69 31s-46-9-69-31Z" fill="url(#cape)"/>
+  <circle cx="104" cy="112" r="6" fill="#38435f"/><circle cx="136" cy="112" r="6" fill="#38435f"/>
+  <path d="M109 132c7 6 15 6 22 0" fill="none" stroke="#a06e65" stroke-width="5" stroke-linecap="round"/>
+</svg>
