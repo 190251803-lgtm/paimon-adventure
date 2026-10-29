@@ -24,8 +24,6 @@ body { margin: 0; min-width: 320px; min-height: 100vh; min-height: 100svh; backg
 button { font: inherit; letter-spacing: 0; }
 button:focus-visible { outline: 3px solid #f2d47a; outline-offset: 3px; }
 
-.orientation-lock { display: none; }
-
 .title-screen {
   min-height: 100vh;
   min-height: 100svh;
@@ -511,41 +509,6 @@ h1 { margin: 0; font-family: Georgia, "Songti SC", serif; font-size: clamp(2rem,
    game so the map and combat controls cannot be accidentally pressed. */
 @media (max-width: 820px) and (orientation: portrait) {
   html, body { width: 100%; height: 100%; overflow: hidden; }
-  body > #app { visibility: hidden; pointer-events: none; }
-  .orientation-lock {
-    position: fixed;
-    z-index: 2000;
-    inset: 0;
-    display: grid;
-    place-items: center;
-    padding: 24px;
-    background: #10191b;
-    color: var(--text);
-    text-align: center;
-  }
-  .orientation-lock-card {
-    display: grid;
-    justify-items: center;
-    gap: 12px;
-    width: min(320px, 100%);
-    padding: 30px 24px;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    background: var(--surface);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, .35);
-  }
-  .orientation-lock-icon {
-    display: grid;
-    place-items: center;
-    width: 64px;
-    height: 64px;
-    border: 2px solid var(--gold);
-    border-radius: 50%;
-    color: var(--gold);
-    font-size: 2rem;
-  }
-  .orientation-lock-card strong { font-size: 1.15rem; }
-  .orientation-lock-card span:last-child { color: var(--muted); font-size: .88rem; }
 }
 
 @media (max-width: 980px) and (orientation: landscape) {
@@ -665,6 +628,87 @@ h1 { margin: 0; font-family: Georgia, "Songti SC", serif; font-size: clamp(2rem,
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
+}
+
+/* On portrait phones, present a landscape game canvas without asking the user
+   to rotate the device. The document class is updated by main.js on resize. */
+@media (max-width: 980px) and (orientation: portrait) {
+  html.virtual-landscape, html.virtual-landscape body { width: 100%; height: 100%; overflow: hidden; }
+  html.virtual-landscape body > #app {
+    position: fixed;
+    inset: 0 auto auto 0;
+    width: 100vh;
+    height: 100vw;
+    min-height: 0;
+    transform: rotate(90deg) translateY(-100%);
+    transform-origin: top left;
+    visibility: visible;
+    pointer-events: auto;
+    overflow: hidden;
+  }
+  html.virtual-landscape .title-screen,
+  html.virtual-landscape .selection-screen,
+  html.virtual-landscape .game-shell,
+  html.virtual-landscape .combat-screen,
+  html.virtual-landscape .result-screen { min-height: 100%; }
+  html.virtual-landscape .title-screen { padding: 12px 24px; }
+  html.virtual-landscape .paimon-emblem { width: 76px; height: 76px; margin-bottom: 8px; }
+  html.virtual-landscape .title-copy { margin: 10px auto 16px; font-size: .88rem; line-height: 1.45; }
+  html.virtual-landscape .title-actions { gap: 8px; }
+  html.virtual-landscape .title-actions button { min-height: 38px; padding-inline: 16px; }
+  html.virtual-landscape .selection-screen {
+    display: grid;
+    grid-template-columns: minmax(190px, .85fr) minmax(0, 2.15fr);
+    grid-template-rows: auto 1fr;
+    grid-template-areas: "back heading" "captain partners";
+    align-items: start;
+    column-gap: 14px;
+    padding: 10px 18px 18px;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  html.virtual-landscape .selection-screen > .back-button { grid-area: back; }
+  html.virtual-landscape .screen-heading { grid-area: heading; width: 100%; margin: 0 0 10px; text-align: left; }
+  html.virtual-landscape .screen-heading h1 { font-size: clamp(1.45rem, 4vw, 2.2rem); }
+  html.virtual-landscape .screen-heading p:last-child { margin: 5px 0 0; font-size: .76rem; line-height: 1.35; }
+  html.virtual-landscape .captain-row { grid-area: captain; width: 100%; margin: 0; }
+  html.virtual-landscape .captain-card { width: 100%; height: 214px; min-height: 0; grid-template-columns: 40% minmax(0, 1fr); grid-template-rows: 214px; }
+  html.virtual-landscape .partner-grid { grid-area: partners; width: 100%; max-width: none; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  html.virtual-landscape .character-card { height: 214px; min-height: 0; grid-template-rows: 92px minmax(0, 1fr); }
+  html.virtual-landscape .character-copy { min-height: 0; overflow: hidden; padding: 8px 9px 10px; }
+  html.virtual-landscape .character-role { font-size: .62rem; }
+  html.virtual-landscape .partner-name { margin-top: 3px; font-size: .94rem; }
+  html.virtual-landscape .partner-element { margin-top: 3px; font-size: .68rem; line-height: 1.25; }
+  html.virtual-landscape .partner-description { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; margin-top: 5px; font-size: .65rem; line-height: 1.3; }
+  html.virtual-landscape .partner-command { padding-top: 5px; font-size: .67rem; }
+  html.virtual-landscape .status-bar { min-height: 50px; padding: 6px 14px; }
+  html.virtual-landscape .status-brand img { width: 30px; height: 30px; }
+  html.virtual-landscape .status-items { gap: 5px 10px; font-size: .72rem; }
+  html.virtual-landscape .choice-panel,
+  html.virtual-landscape .reward-content { min-height: calc(100% - 50px); padding: 18px 18px 28px; overflow-x: hidden; overflow-y: auto; }
+  html.virtual-landscape .reward-content > .eyebrow { margin-top: 0; }
+  html.virtual-landscape .reward-content > h1 { margin: 4px 0 8px; font-size: 2rem; }
+  html.virtual-landscape .starting-treasure-art { width: 120px; height: 52px; margin: 0 auto 4px; }
+  html.virtual-landscape .starting-treasure-art .node-scene-art { width: 100%; height: 100%; max-height: none; }
+  html.virtual-landscape .reward-content .reward-note { max-width: 720px; margin: 6px auto 10px; font-size: .78rem; }
+  html.virtual-landscape .reward-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin: 14px 0 16px; align-items: stretch; }
+  html.virtual-landscape .reward-card,
+  html.virtual-landscape .relic-choice { width: 100%; min-width: 0; min-height: 150px; padding: 8px 7px; overflow: hidden; }
+  html.virtual-landscape .reward-card > span:last-child,
+  html.virtual-landscape .relic-choice > span:last-child { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; font-size: .68rem; line-height: 1.3; }
+  html.virtual-landscape .relic-choice { gap: 6px; }
+  html.virtual-landscape .relic-symbol { width: 36px; height: 36px; font-size: 1.2rem; }
+  html.virtual-landscape .choice-list { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 900px; }
+  html.virtual-landscape .choice-button { min-height: 64px; grid-template-columns: 1fr; gap: 4px; padding: 10px 12px; }
+  html.virtual-landscape .choice-button span { font-size: .76rem; }
+}
+
+@media (max-width: 700px) and (orientation: portrait) {
+  html.virtual-landscape .selection-screen { grid-template-columns: minmax(155px, .72fr) minmax(0, 2.28fr); column-gap: 9px; padding-inline: 10px; }
+  html.virtual-landscape .captain-card { height: 190px; grid-template-rows: 190px; }
+  html.virtual-landscape .character-card { height: 190px; grid-template-rows: 78px minmax(0, 1fr); }
+  html.virtual-landscape .partner-description { -webkit-line-clamp: 2; }
+  html.virtual-landscape .reward-card, html.virtual-landscape .relic-choice { min-height: 150px; }
 }
 :root { --monster-gold: #e4bf65; }
 .monster-library { max-width: 1240px; margin: 0 auto; padding: 36px 28px 70px; min-height: 100vh; }
