@@ -515,6 +515,7 @@ h1 { margin: 0; font-family: Georgia, "Songti SC", serif; font-size: clamp(2rem,
   html, body { width: 100%; min-height: 100%; overflow-x: hidden; }
   body { min-height: 100dvh; }
   #app, .game-shell, .combat-screen { min-height: 100dvh; }
+  .combat-screen { height: 100dvh; overflow: hidden; }
 
   .title-screen {
     min-height: 100dvh;
@@ -575,6 +576,7 @@ h1 { margin: 0; font-family: Georgia, "Songti SC", serif; font-size: clamp(2rem,
   .encounter-panel > p:not(.eyebrow) { font-size: .9rem; line-height: 1.5; }
 
   .combat-stage {
+    height: calc(100% - 50px);
     min-height: calc(100dvh - 50px);
     max-height: calc(100dvh - 50px);
     grid-template-rows: minmax(140px, 1fr) auto auto;
@@ -587,11 +589,15 @@ h1 { margin: 0; font-family: Georgia, "Songti SC", serif; font-size: clamp(2rem,
   .enemy-field { min-height: 96px; }
   .battle-log { margin-inline: max(6px, env(safe-area-inset-left)) max(6px, env(safe-area-inset-right)); padding: 5px 8px; }
   .battle-log p { margin: 2px 0; font-size: .68rem; }
-  .hand-area { padding: 4px max(8px, env(safe-area-inset-right)) max(8px, env(safe-area-inset-bottom)) max(8px, env(safe-area-inset-left)); }
-  .turn-controls { min-height: 34px; }
+  .hand-area { min-height: 0; padding: 3px max(8px, env(safe-area-inset-right)) max(5px, env(safe-area-inset-bottom)) max(8px, env(safe-area-inset-left)); }
+  .hand-area .combo-strip, .hand-area .card-drag-hint { display: none; }
+  .turn-controls { min-height: 30px; }
   .turn-controls button { min-height: 30px; padding-inline: 9px; font-size: .68rem; }
-  .card-hand { min-height: 112px; padding: 4px; }
-  .game-card { width: 104px; min-width: 104px; min-height: 108px; }
+  .card-hand { min-height: 84px; padding: 3px; overflow-x: auto; }
+  .game-card { width: 96px; min-width: 96px; height: 82px; min-height: 82px; flex: 0 0 96px; padding: 7px 5px; }
+  .game-card strong { margin-top: 5px; font-size: .78rem; }
+  .game-card .card-art { width: 34px; height: 34px; margin: 4px 0; font-size: 1rem; }
+  .game-card .card-description { font-size: .58rem; }
 
   .choice-panel, .reward-content { min-height: calc(100dvh - 50px); padding: 18px max(18px, env(safe-area-inset-right)) max(28px, env(safe-area-inset-bottom)) max(18px, env(safe-area-inset-left)); overflow-x: hidden; overflow-y: auto; }
   .choice-panel h1, .reward-content h1 { font-size: clamp(1.8rem, 5vw, 2.8rem); }
@@ -651,6 +657,9 @@ h1 { margin: 0; font-family: Georgia, "Songti SC", serif; font-size: clamp(2rem,
   html.virtual-landscape .game-shell,
   html.virtual-landscape .combat-screen,
   html.virtual-landscape .result-screen { min-height: 100%; }
+  html.virtual-landscape .game-shell,
+  html.virtual-landscape .combat-screen { height: 100%; overflow-x: hidden; overflow-y: auto; }
+  html.virtual-landscape .combat-screen { overflow-y: hidden; }
   html.virtual-landscape .title-screen { padding: 12px 24px; }
   html.virtual-landscape .paimon-emblem { width: 76px; height: 76px; margin-bottom: 8px; }
   html.virtual-landscape .title-copy { margin: 10px auto 16px; font-size: .88rem; line-height: 1.45; }
@@ -684,6 +693,61 @@ h1 { margin: 0; font-family: Georgia, "Songti SC", serif; font-size: clamp(2rem,
   html.virtual-landscape .status-bar { min-height: 50px; padding: 6px 14px; }
   html.virtual-landscape .status-brand img { width: 30px; height: 30px; }
   html.virtual-landscape .status-items { gap: 5px 10px; font-size: .72rem; }
+  html.virtual-landscape .map-scroll { max-width: 100%; overflow-x: auto; }
+  html.virtual-landscape .map-frame.map-frame--branching { height: min(58vw, 440px); min-height: 220px; }
+  html.virtual-landscape .map-frame { max-height: calc(100vh - 128px); }
+  html.virtual-landscape .encounter-panel { min-height: calc(100% - 50px); padding: 20px; }
+  html.virtual-landscape .combat-stage {
+    width: 100%;
+    height: calc(100% - 50px);
+    min-height: 0;
+    max-height: none;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: minmax(0, 1fr) auto auto;
+    align-content: stretch;
+    overflow: hidden;
+  }
+  html.virtual-landscape .player-field,
+  html.virtual-landscape .enemy-side { min-height: 0; padding: 76px 6px 0; }
+  html.virtual-landscape .combat-round-banner { top: 5px; right: 6px; left: auto; transform: none; }
+  html.virtual-landscape .combat-summary { top: 6px; left: 5px; width: calc(100% - 10px); padding: 5px 7px; }
+  html.virtual-landscape .combat-summary-heading { margin-bottom: 4px; font-size: .72rem; }
+  html.virtual-landscape .combat-summary-heading span { display: none; }
+  html.virtual-landscape .combat-vitals { font-size: .62rem; }
+  html.virtual-landscape .resource-list { gap: 6px; margin-top: 3px; }
+  html.virtual-landscape .resource-list div { display: flex; align-items: center; justify-content: center; gap: 3px; padding-top: 3px; font-size: .56rem; }
+  html.virtual-landscape .combat-team-portraits { width: 100%; }
+  html.virtual-landscape .team-character img,
+  html.virtual-landscape .enemy-avatar { height: min(13vw, 56px); }
+  html.virtual-landscape .team-character figcaption { min-width: 0; width: 94%; gap: 3px; padding: 3px; font-size: .62rem; }
+  html.virtual-landscape .team-character figcaption span { display: none; }
+  html.virtual-landscape .enemy-side-heading { top: 38px; right: 5px; width: calc(100% - 10px); min-width: 0; padding: 6px 7px; font-size: .7rem; }
+  html.virtual-landscape .enemy-side-heading span { display: none; }
+  html.virtual-landscape .enemy-field { --enemy-card-gap: 6px; min-height: 0; gap: 6px; }
+  html.virtual-landscape .enemy-detail-links { display: none; }
+  html.virtual-landscape .enemy-unit { gap: 3px; padding-bottom: 2px; }
+  html.virtual-landscape .enemy-unit > strong { max-width: 100%; padding: 3px 4px; font-size: .61rem; }
+  html.virtual-landscape .enemy-health { padding: 2px 3px; font-size: .53rem; text-align: center; }
+  html.virtual-landscape .enemy-intent { min-width: 0; max-width: 100%; padding: 3px 4px; font-size: .59rem; }
+  html.virtual-landscape .enemy-intent small { font-size: .52rem; }
+  html.virtual-landscape .enemy-health,
+  html.virtual-landscape .enemy-intent small { display: none; }
+  html.virtual-landscape .battle-log { min-height: 0; margin-inline: 6px; padding: 4px 7px; }
+  html.virtual-landscape .battle-log > strong,
+  html.virtual-landscape .battle-log p:nth-child(n+2) { display: none; }
+  html.virtual-landscape .battle-log > div { grid-template-columns: 1fr; }
+  html.virtual-landscape .battle-log p { padding: 2px 5px; font-size: .6rem; }
+  html.virtual-landscape .hand-area { min-height: 0; padding: 3px 7px max(5px, env(safe-area-inset-bottom)); }
+  html.virtual-landscape .hand-area .combo-strip,
+  html.virtual-landscape .hand-area .card-drag-hint { display: none; }
+  html.virtual-landscape .turn-controls { min-height: 30px; justify-content: flex-start; flex-wrap: nowrap; gap: 5px; font-size: .6rem; }
+  html.virtual-landscape .turn-controls span { display: none; }
+  html.virtual-landscape .turn-controls button { min-height: 27px; padding-inline: 7px; font-size: .6rem; }
+  html.virtual-landscape .card-hand { min-height: 0; max-width: 100%; justify-content: flex-start; gap: 5px; overflow-x: auto; padding: 3px 3px 5px; }
+  html.virtual-landscape .game-card { width: 94px; min-width: 94px; height: 82px; min-height: 82px; flex: 0 0 94px; padding: 8px 6px; }
+  html.virtual-landscape .game-card strong { margin-top: 5px; font-size: .75rem; }
+  html.virtual-landscape .card-art { width: 34px; height: 34px; margin: 4px 0; font-size: 1rem; }
+  html.virtual-landscape .card-description { font-size: .58rem; line-height: 1.25; }
   html.virtual-landscape .choice-panel,
   html.virtual-landscape .reward-content { min-height: calc(100% - 50px); padding: 18px 18px 28px; overflow-x: hidden; overflow-y: auto; }
   html.virtual-landscape .reward-content > .eyebrow { margin-top: 0; }
@@ -701,6 +765,7 @@ h1 { margin: 0; font-family: Georgia, "Songti SC", serif; font-size: clamp(2rem,
   html.virtual-landscape .choice-list { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 900px; }
   html.virtual-landscape .choice-button { min-height: 64px; grid-template-columns: 1fr; gap: 4px; padding: 10px 12px; }
   html.virtual-landscape .choice-button span { font-size: .76rem; }
+  html.virtual-landscape .shop-content { padding: 18px 18px 28px; }
 }
 
 @media (max-width: 700px) and (orientation: portrait) {
@@ -709,6 +774,25 @@ h1 { margin: 0; font-family: Georgia, "Songti SC", serif; font-size: clamp(2rem,
   html.virtual-landscape .character-card { height: 190px; grid-template-rows: 78px minmax(0, 1fr); }
   html.virtual-landscape .partner-description { -webkit-line-clamp: 2; }
   html.virtual-landscape .reward-card, html.virtual-landscape .relic-choice { min-height: 150px; }
+}
+
+@media (max-width: 350px) and (orientation: portrait) {
+  html.virtual-landscape .player-field,
+  html.virtual-landscape .enemy-side { padding-top: 64px; }
+  html.virtual-landscape .resource-list { display: none; }
+  html.virtual-landscape .team-character img,
+  html.virtual-landscape .enemy-avatar { height: min(13vw, 44px); }
+  html.virtual-landscape .enemy-unit { gap: 2px; }
+  html.virtual-landscape .enemy-unit > strong { padding: 2px 3px; font-size: .55rem; }
+  html.virtual-landscape .enemy-health { display: none; }
+  html.virtual-landscape .enemy-intent { padding: 2px 3px; font-size: .54rem; }
+  html.virtual-landscape .enemy-intent small { display: none; }
+  html.virtual-landscape .hand-area { padding-block: 2px; }
+  html.virtual-landscape .card-hand { padding-block: 2px; }
+  html.virtual-landscape .game-card { height: 58px; min-height: 58px; }
+  html.virtual-landscape .game-card .card-art,
+  html.virtual-landscape .game-card .card-description,
+  html.virtual-landscape .game-card .card-combo-hint { display: none; }
 }
 :root { --monster-gold: #e4bf65; }
 .monster-library { max-width: 1240px; margin: 0 auto; padding: 36px 28px 70px; min-height: 100vh; }
